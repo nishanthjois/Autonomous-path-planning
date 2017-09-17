@@ -26,7 +26,7 @@ The waypoints are in the middle of the double-yellow dividing line in the center
 Every 20 ms the car moves to the next point on the list. The car's new rotation becomes the line between the previous waypoint and the car's new location.
 The velocity of the car depends on the spacing of the points because the car moves to a new waypoint every 20ms, the larger the spacing between points, the faster the car will travel. The speed goal is to have the car traveling at (but not above) the 50 MPH speed limit as often as possible. But there will be times when traffic gets in the way.
 
-Walkthrough:
+#### Walkthrough:
 
 Step 1: Get our car's localization data from simulator/previously generated paths:
 Code:
@@ -172,15 +172,11 @@ Code:
 Step 7: Output
 Planner outputs list of x (next_x_vals) and y (next_y_vals) global map coordinates which is used to control the car around the highway.  
 
-Future/pending work:
+#### Future/pending work:
 Use of cost functions
 Behavioral planning of other cars
 
-Screenshot:
-
-
-
-Video:
+#### Video:
 https://youtu.be/gYuh0CbF2o4
 
 References:
