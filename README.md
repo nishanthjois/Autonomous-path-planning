@@ -30,6 +30,7 @@ Walkthrough:
 
 Step 1: Get our car's localization data from simulator/previously generated paths:
 Code:
+
                     double car_x = j[1]["x"];
                     double car_y = j[1]["y"];
                     double car_s = j[1]["s"];
@@ -62,6 +63,7 @@ The sensor_fusion variable contains all the information about the cars in the ro
 The data format for each car is: [ id, x, y, vx, vy, s, d]. The id is a unique identifier for that car. The x, y values are in global map coordinates, and the vx, vy values are the velocity components, also in reference to the global map. Finally s and d are the Frenet coordinates for that car.
 
 Code:
+  
              	    	float d = sensor_fusion[i][6];
                             double s = sensor_fusion[i][5];
                             double vx = sensor_fusion[i][3];
@@ -70,16 +72,12 @@ Code:
                             double check_car_s = sensor_fusion[i][5];
 
 
-
-
-
-
-
 Part 3: Check where the surrounding cars will be in future.
 If you were to assume that the tracked car kept moving along the road, then its future predicted Frenet s value will be its current s value plus its (transformed) total velocity (m/s) multiplied by the time elapsed into the future (s).
 
 Code:
-check_car_s += double(prev_size)*0.02*check_speed;
+  
+    check_car_s += double(prev_size)*0.02*check_speed;
 
 Part 4: Check if is safe to switch lanes:
 Check the position of car's lane and position (s) of other cars in new lane and determine if its safe to switch.
@@ -90,7 +88,9 @@ If you would like to be in the middle lane, add the waypoint's coordinates to th
 
 Check if left lane is clear:
 Code:
-if((d>0) && (d<2+4*lane-2) && (abs(check_car_s-end_path_s)<30))
+
+  
+    if((d>0) && (d<2+4*lane-2) && (abs(check_car_s-end_path_s)<30))
                             {
                                 safe_to_change_left = false;
                                 std::cout<< "d: " << d << endl;
@@ -101,7 +101,8 @@ if((d>0) && (d<2+4*lane-2) && (abs(check_car_s-end_path_s)<30))
 
 Check if right lane is clear:
 Code:
- if((d>0) && (d>2+4*lane+2) && (abs(check_car_s-end_path_s)<30))
+ 
+    if((d>0) && (d>2+4*lane+2) && (abs(check_car_s-end_path_s)<30))
                             {
                                 safe_to_change_right = false;
                                 std::cout<< "d: " << d << endl;
@@ -139,10 +140,10 @@ vector<double> next_wp0 = getXY(car_s+30,(2+4*lane),map_waypoints_s,map_waypoint
 - Calculate how to break spline points so as to travel at required ref velocity and fill up the remaining of path planner after filling it with previous points. [Imagine a right angled triangle, with target_x, target_y and target_dist as its axis]. 
 
 Code:
-                    // Calculate how to break spline points so as to travel at required ref velocity
-                    double target_x = 30; // Horizon value - we will use to point where does our point lies in Spline
-                    double target_y = s(target_x); 
-                    double target_dist = distance(target_x,target_y,0,0); // Distance from the car to the target point
+                      // Calculate how to break spline points so as to travel at required ref velocity
+                      double target_x = 30; // Horizon value - we will use to point where does our point lies in Spline
+                      double target_y = s(target_x); 
+                      double target_dist = distance(target_x,target_y,0,0); // Distance from the car to the target point
 
                     double x_add_on = 0;
 
